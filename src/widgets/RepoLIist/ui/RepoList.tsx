@@ -15,8 +15,9 @@ export const RepoList = observer(({ url }: { url: string }) => {
     fetchRepositories(url)
   }, [fetchRepositories, url])
 
-  if (error) return <Typography variant="h1">{error}</Typography>
   if (isLoading) return <Loader />
+  if (error) return <Typography variant="h1">{error}</Typography>
+  if (!repositories) return <Typography variant="h1">Repositories not found</Typography>
 
   return (
     <Box sx={{ py: 2 }}>
@@ -52,7 +53,7 @@ export const RepoList = observer(({ url }: { url: string }) => {
                   </Typography>
                 </Link>
                 <Tooltip title="Copy to clipboard">
-                  <IconButton onClick={() => navigator.clipboard.writeText(repo.clone_url)}>
+                  <IconButton onClick={() => navigator.clipboard.writeText(repo?.clone_url)}>
                     <ContentCopyIcon />
                   </IconButton>
                 </Tooltip>
