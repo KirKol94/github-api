@@ -1,9 +1,21 @@
-import { Container, Typography } from '@mui/material'
+import { profileDataStore } from '@/features/ProfileData'
+import { ProfileData } from '@/widgets/ProfileData'
+import { RepoList } from '@/widgets/RepoLIist'
+import { Container } from '@mui/material'
+import { observer } from 'mobx-react-lite'
+import { useEffect } from 'react'
 
-export const Home = () => {
+export const Home = observer(() => {
+  const { fetchProfile, profile } = profileDataStore
+
+  useEffect(() => {
+    fetchProfile()
+  }, [fetchProfile])
+
   return (
     <Container>
-      <Typography variant="h1">Home</Typography>
+      <ProfileData />
+      {profile && <RepoList url={profile.repos_url} />}
     </Container>
   )
-}
+})
