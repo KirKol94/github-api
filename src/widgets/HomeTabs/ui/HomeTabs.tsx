@@ -1,6 +1,10 @@
+import { profileDataStore } from '@/features/ProfileData'
+import { RepoList } from '@/features/RepoLIist'
+import { SubscriptionsData } from '@/features/SubscriptionsData'
 import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
+import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 
 interface TabPanelProps {
@@ -20,7 +24,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <>{children}</>}
     </div>
   )
 }
@@ -32,7 +36,8 @@ function a11yProps(index: number) {
   }
 }
 
-export const BasicTabs = ({ headers, children }: { headers: string[]; children: React.ReactNode[] }) => {
+export const HomeTabs = observer(() => {
+  const { profile } = profileDataStore
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -40,21 +45,24 @@ export const BasicTabs = ({ headers, children }: { headers: string[]; children: 
     setValue(newValue)
   }
 
+  if (!profile) {
+    return null
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          {headers.map((header, index) => (
-            <Tab key={index + header} label={header} {...a11yProps(index)} />
-          ))}
+          <Tab label="Repositories" {...a11yProps(0)} />
+          <Tab label="Subscriptions" {...a11yProps(1)} />
         </Tabs>
       </Box>
-
-      {children.map((child, index) => (
-        <CustomTabPanel key={index} value={value} index={index}>
-          {child}
-        </CustomTabPanel>
-      ))}
+      <CustomTabPanel value={value} index={0}>
+        <RepoList url={profile.repos_url} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <SubscriptionsData url={profile.following_url} />
+      </CustomTabPanel>
     </Box>
   )
-}
+})
