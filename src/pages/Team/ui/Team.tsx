@@ -1,6 +1,6 @@
 import { MyTeam } from '@/widgets/MyTeam'
 import { UserList } from '@/widgets/UserList'
-import { Box, Container, Grid, Typography } from '@mui/material'
+import { Container, Grid, Typography } from '@mui/material'
 
 export const Team = () => {
   return (
