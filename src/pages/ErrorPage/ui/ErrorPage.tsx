@@ -1,25 +1,24 @@
 import { Box, Container, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const ErrorPage = () => {
-  const timer = 5
-  // TODO uncomment it
-  // const navigate = useNavigate()
-  // const [timer, setTimer] = useState(5)
+  const navigate = useNavigate()
+  const [timer, setTimer] = useState(5)
 
-  // useEffect(() => {
-  //   const navigateTimer = setInterval(() => {
-  //     setTimer(timer - 1)
-  //   }, 1000)
+  useEffect(() => {
+    const navigateTimer = setInterval(() => {
+      setTimer(timer - 1)
+    }, 1000)
 
-  //   if (timer === 0) {
-  //     navigate('/')
-  //   }
+    if (timer === 0) {
+      navigate('/')
+    }
 
-  //   return () => {
-  //     clearTimeout(navigateTimer)
-  //   }
-  // }, [navigate, timer])
+    return () => {
+      clearTimeout(navigateTimer)
+    }
+  }, [navigate, timer])
 
   return (
     <Container>

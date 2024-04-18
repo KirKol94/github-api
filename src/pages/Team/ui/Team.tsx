@@ -1,11 +1,16 @@
+import { MyTeam } from '@/widgets/MyTeam'
 import { UserList } from '@/widgets/UserList'
-import { Container, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 
 export const Team = () => {
   return (
     <Container>
       <Typography variant="h1">Team</Typography>
-      <UserList />
+
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+        <MyTeam />
+        <UserList />
+      </Box>
     </Container>
   )
 }

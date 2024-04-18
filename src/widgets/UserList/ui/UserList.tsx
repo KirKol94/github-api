@@ -5,9 +5,11 @@ import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import { userListDataStore } from '../model/store/userListDataStore'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
+import { myTeamStore } from '@/features/MyTeam'
 
 export const UserList = observer(() => {
   const { fetchUsers, users, error, isLoading } = userListDataStore
+  const { addTeammate, myTeammates } = myTeamStore
   const [searchValue, setSearchValue] = useState('')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc') // Состояние для хранения порядка сортировки
 
@@ -60,8 +62,6 @@ export const UserList = observer(() => {
           <Typography variant="h2">Users</Typography>
           <Tooltip title="Change sort order">
             <IconButton onClick={handleSortClick}>
-              {' '}
-              {/* Добавляем обработчик клика */}
               <SortByAlphaIcon />
             </IconButton>
           </Tooltip>
@@ -74,7 +74,7 @@ export const UserList = observer(() => {
         {sortedUsers
           .filter(user => user.login.toLowerCase().includes(searchValue.toLowerCase()))
           .map(user => (
-            <ListItem key={user.id} sx={{ pl: 0 }}>
+            <ListItem key={user.id} sx={{ px: 0, display: 'flex', justifyContent: 'space-between' }}>
               <Link href={user.html_url} sx={{ color: 'inherit', display: 'flex', alignItems: 'center' }}>
                 <Avatar alt={user.login} src={user.avatar_url} sx={{ width: 50, height: 50 }} />
 
@@ -84,12 +84,14 @@ export const UserList = observer(() => {
                   </Typography>
                 </Box>
               </Link>
-              <Tooltip title="Add user to team">
-                {/* TODO Add user to team */}
-                <IconButton onClick={() => {}}>
-                  <ControlPointIcon />
-                </IconButton>
-              </Tooltip>
+
+              {myTeammates.find(teammate => teammate.id === user.id) ? null : (
+                <Tooltip title="Add user to team">
+                  <IconButton onClick={() => addTeammate(user)}>
+                    <ControlPointIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
             </ListItem>
           ))}
       </List>

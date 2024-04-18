@@ -51,7 +51,7 @@ export const BasicTabs = ({ headers, children }: { headers: string[]; children: 
       </Box>
 
       {children.map((child, index) => (
-        <CustomTabPanel key={index + headers[index]} value={value} index={index}>
+        <CustomTabPanel key={index} value={value} index={index}>
           {child}
         </CustomTabPanel>
       ))}
