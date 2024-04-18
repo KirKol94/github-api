@@ -1,3 +1,4 @@
+import { Tabs } from '@/shared/ui/Tabs'
 import { ProfileData, profileDataStore } from '@/widgets/ProfileData'
 import { RepoList } from '@/widgets/RepoLIist'
 import { SubscriptionsData } from '@/widgets/SubscriptionsData'
@@ -15,8 +16,12 @@ export const Home = observer(() => {
   return (
     <Container>
       <ProfileData />
-      {profile && <RepoList url={profile.repos_url} />}
-      {profile && <SubscriptionsData url={profile.following_url} />}
+      {profile && (
+        <Tabs
+          headers={['Repositories', 'Following']}
+          children={[<RepoList url={profile?.repos_url} />, <SubscriptionsData url={profile?.following_url} />]}
+        />
+      )}
     </Container>
   )
 })
