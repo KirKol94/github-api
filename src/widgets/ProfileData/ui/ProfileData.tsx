@@ -1,9 +1,9 @@
-import { profileDataStore } from '../model/store/profileDataStore'
 import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Avatar, Box, Link, TextField, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Grid, Link, TextField, Tooltip, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { profileDataStore } from '../model/store/profileDataStore'
 
 export const ProfileData = () => {
   const { fetchProfile, profile, error, isLoading } = profileDataStore
@@ -23,14 +23,21 @@ export const ProfileData = () => {
   if (!profile) return <Typography variant="h1">Profile not found</Typography>
 
   return (
-    <Box sx={{ py: 2, display: 'flex', gap: 2, alignItems: 'center', borderBottom: '2px solid black' }}>
-      <Avatar alt={profile?.name} src={profile?.avatar_url} sx={{ width: 150, height: 150 }} />
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        <Link href={profile?.html_url} sx={{ color: 'inherit' }}>
-          <Typography variant="h1" component="h1">
-            {profile?.login}
-          </Typography>
-        </Link>
+    <Grid container alignItems="center" sx={{ py: 3 }}>
+      <Grid item xs={12} sm={6} md={3}>
+        <Avatar alt={profile?.name} src={profile?.avatar_url} sx={{ width: '100%', height: '100%' }} />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={9} sx={{ pl: 2 }}>
+        <Tooltip title="Go to GitHub profile">
+          <Link href={profile?.html_url} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Typography variant="h2" component="h1">
+              {profile?.login}
+            </Typography>
+
+            <GitHubIcon />
+          </Link>
+        </Tooltip>
 
         <form onSubmit={handleSubmit}>
           <TextField
@@ -43,22 +50,16 @@ export const ProfileData = () => {
           />
         </form>
 
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <Tooltip title="Go to GitHub profile">
-            <Link href={profile.html_url}>
-              <GitHubIcon sx={{ color: 'black' }} />
-            </Link>
-          </Tooltip>
-
-          <Typography variant="subtitle2" component="i">
+        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Typography variant="subtitle2" component="code">
             {profile.bio}
           </Typography>
-        </Box>
 
-        <Typography variant="body1" component="span">
-          Account created: <b>{dateFormatter(profile.created_at)}</b>
-        </Typography>
-      </Box>
-    </Box>
+          <Typography variant="body1">
+            Account created: <b>{dateFormatter(profile.created_at)}</b>
+          </Typography>
+        </Box>
+      </Grid>
+    </Grid>
   )
 }
