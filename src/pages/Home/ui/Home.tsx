@@ -1,5 +1,4 @@
-import { profileDataStore } from '@/features/ProfileData'
-import { ProfileData } from '@/widgets/ProfileData'
+import { ProfileData, profileDataStore } from '@/widgets/ProfileData'
 import { RepoList } from '@/widgets/RepoLIist'
 import { SubscriptionsData } from '@/widgets/SubscriptionsData'
 import { Container } from '@mui/material'

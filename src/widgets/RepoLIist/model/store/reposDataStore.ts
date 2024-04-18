@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios'
+import { $api } from '@/shared/api'
+import { AxiosResponse } from 'axios'
 import { makeAutoObservable } from 'mobx'
 import { GHRepo } from '../types'
 
@@ -21,12 +22,7 @@ class ReposDataStore implements ReposState {
   fetchRepositories = (url: string) => {
     this.isLoading = true
     this.error = null
-    axios<GHRepo[]>(url, {
-      headers: {
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'kirkol94',
-      },
-    }).then(this.successFetch, this.failedFetch)
+    $api<GHRepo[]>(url).then(this.successFetch, this.failedFetch)
     this.isLoading = false
   }
 

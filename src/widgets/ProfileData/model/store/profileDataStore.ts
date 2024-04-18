@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios'
+import { $api } from '@/shared/api'
+import { AxiosResponse } from 'axios'
 import { makeAutoObservable } from 'mobx'
 import { GHProfile } from '../types'
 
@@ -21,12 +22,7 @@ class ProfileDataStore implements ProfileState {
   fetchProfile = () => {
     this.isLoading = true
     this.error = null
-    axios<GHProfile>('https://api.github.com/users/kirkol94', {
-      headers: {
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'kirkol94',
-      },
-    }).then(this.successFetch, this.failedFetch)
+    $api<GHProfile>('https://api.github.com/users/kirkol94').then(this.successFetch, this.failedFetch)
     this.isLoading = false
   }
 

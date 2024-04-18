@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios'
+import { $api } from '@/shared/api'
+import { AxiosResponse } from 'axios'
 import { makeAutoObservable } from 'mobx'
 import { GHSubscription } from '../types'
 
@@ -19,16 +20,10 @@ class SubscriptionsDataStore implements SubscriptionsState {
   error: string | null = null
 
   fetchSubscriptions = (url: string) => {
-    console.log(url)
     this.isLoading = true
     this.error = null
     const correctUrl = url.replace('{/other_user}', '')
-    axios<GHSubscription[]>(correctUrl, {
-      headers: {
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'kirkol94',
-      },
-    }).then(this.successFetch, this.failedFetch)
+    $api<GHSubscription[]>(correctUrl).then(this.successFetch, this.failedFetch)
     this.isLoading = false
   }
 

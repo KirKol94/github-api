@@ -1,4 +1,4 @@
-import { subscriptionsDataStore } from '@/features/SubscriptionsData'
+import { subscriptionsDataStore } from '../model/store/subscriptionsDataStore'
 import { Loader } from '@/shared/ui/Loader'
 import { Avatar, Box, Link, List, ListItem, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'

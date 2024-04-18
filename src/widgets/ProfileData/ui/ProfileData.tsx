@@ -1,4 +1,4 @@
-import { profileDataStore } from '@/features/ProfileData'
+import { profileDataStore } from '../model/store/profileDataStore'
 import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
