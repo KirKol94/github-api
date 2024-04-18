@@ -17,7 +17,9 @@ export const SubscriptionsData = observer(({ url }: { url: string }) => {
 
   return (
     <Box>
-      <Typography variant="h2">Subscriptions</Typography>
+      <Typography variant="h3" component="h2">
+        Subscriptions
+      </Typography>
 
       <List>
         {subscriptions.map(sub => (

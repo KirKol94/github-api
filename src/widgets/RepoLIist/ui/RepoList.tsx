@@ -21,13 +21,21 @@ export const RepoList = observer(({ url }: { url: string }) => {
 
   return (
     <Box>
-      <Typography variant="h2">Repos</Typography>
+      <Typography variant="h3" component="h2">
+        Repos
+      </Typography>
 
-      <List>
+      <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         {repositories.map(repo => (
           <ListItem
             key={repo.id}
-            sx={{ px: 0, overflowX: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'start' }}
+            sx={{
+              overflowX: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'start',
+              boxShadow: 1,
+            }}
           >
             <Grid container alignContent="center" alignItems="center">
               <Grid item xs={12} sm={6} md={4}>
