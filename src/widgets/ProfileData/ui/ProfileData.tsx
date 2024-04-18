@@ -2,7 +2,7 @@ import { profileDataStore } from '../model/store/profileDataStore'
 import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Avatar, Box, Link, Typography } from '@mui/material'
+import { Avatar, Box, Link, Tooltip, Typography } from '@mui/material'
 
 export const ProfileData = () => {
   const { profile, error, isLoading } = profileDataStore
@@ -22,9 +22,11 @@ export const ProfileData = () => {
         </Link>
 
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <Link href={profile.html_url}>
-            <GitHubIcon sx={{ color: 'black' }} />
-          </Link>
+          <Tooltip title="Go to GitHub profile">
+            <Link href={profile.html_url}>
+              <GitHubIcon sx={{ color: 'black' }} />
+            </Link>
+          </Tooltip>
 
           <Typography variant="subtitle2" component="i">
             {profile.bio}
