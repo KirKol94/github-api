@@ -7,7 +7,7 @@ interface ProfileState {
   profile: GHProfile | null
   isLoading: boolean
   error: string | null
-  fetchProfile: () => void
+  fetchProfile: (url: string) => void
 }
 
 class ProfileDataStore implements ProfileState {
@@ -19,10 +19,10 @@ class ProfileDataStore implements ProfileState {
   isLoading: boolean = false
   error: string | null = null
 
-  fetchProfile = () => {
+  fetchProfile = (url: string) => {
     this.isLoading = true
     this.error = null
-    $api<GHProfile>('https://api.github.com/users/kirkol94').then(this.successFetch, this.failedFetch)
+    $api<GHProfile>(url).then(this.successFetch, this.failedFetch)
     this.isLoading = false
   }
 

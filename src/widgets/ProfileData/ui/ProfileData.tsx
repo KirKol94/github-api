@@ -2,10 +2,21 @@ import { profileDataStore } from '../model/store/profileDataStore'
 import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Avatar, Box, Link, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Link, TextField, Tooltip, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 export const ProfileData = () => {
-  const { profile, error, isLoading } = profileDataStore
+  const { fetchProfile, profile, error, isLoading } = profileDataStore
+  const [login, setLogin] = useState('')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    fetchProfile('https://api.github.com/users/' + login)
+  }
+
+  useEffect(() => {
+    fetchProfile('https://api.github.com/users/kirkol94')
+  }, [fetchProfile])
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>
@@ -20,6 +31,17 @@ export const ProfileData = () => {
             {profile?.login}
           </Typography>
         </Link>
+
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="github login"
+            variant="standard"
+            value={login}
+            onChange={e => setLogin(e.target.value)}
+            onSubmit={handleSubmit}
+          />
+        </form>
 
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <Tooltip title="Go to GitHub profile">
