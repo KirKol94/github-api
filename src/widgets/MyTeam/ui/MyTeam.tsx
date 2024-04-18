@@ -1,7 +1,7 @@
 import { myTeamStore } from '@/features/MyTeam'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove'
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha'
-import { Avatar, Box, IconButton, Link, List, ListItem, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Grid, IconButton, Link, List, ListItem, Tooltip, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
@@ -24,9 +24,11 @@ export const MyTeam = observer(() => {
   })
 
   return (
-    <Box>
+    <Grid item xs={12} md={6}>
       <Box sx={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
-        <Typography variant="h2">My Team</Typography>
+        <Typography variant="h3" component="h2">
+          My Team
+        </Typography>
         <Tooltip title="Change sort order">
           <IconButton onClick={handleSortClick}>
             <SortByAlphaIcon />
@@ -52,6 +54,6 @@ export const MyTeam = observer(() => {
           </ListItem>
         ))}
       </List>
-    </Box>
+    </Grid>
   )
 })

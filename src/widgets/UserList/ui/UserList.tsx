@@ -1,5 +1,5 @@
 import { Loader } from '@/shared/ui/Loader'
-import { Avatar, Box, IconButton, Link, List, ListItem, TextField, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Grid, IconButton, Link, List, ListItem, TextField, Tooltip, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import { userListDataStore } from '../model/store/userListDataStore'
@@ -25,7 +25,7 @@ export const UserList = observer(() => {
   if (!users) return <Typography variant="h1">Users not found</Typography>
 
   return (
-    <Box>
+    <Grid item xs={12} md={6}>
       <Box
         sx={{
           display: 'flex',
@@ -38,15 +38,15 @@ export const UserList = observer(() => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            borderBottom: '2px solid black',
           }}
         >
-          <Typography variant="h2">Users</Typography>
+          <Typography variant="h3" component="h2">
+            Users
+          </Typography>
         </Box>
 
         <TextField label="Search" variant="outlined" type="search" onChange={filterList} value={searchValue} />
       </Box>
-
       <List>
         {users
           .filter(user => user.login.toLowerCase().includes(searchValue.toLowerCase()))
@@ -72,6 +72,6 @@ export const UserList = observer(() => {
             </ListItem>
           ))}
       </List>
-    </Box>
+    </Grid>
   )
 })
