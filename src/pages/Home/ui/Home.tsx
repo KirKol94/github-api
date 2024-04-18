@@ -13,8 +13,8 @@ export const Home = observer(() => {
       <ProfileData />
       {profile && (
         <Tabs
-          headers={['Repositories', 'Following']}
-          children={[<RepoList url={profile?.repos_url} />, <SubscriptionsData url={profile?.following_url} />]}
+          headers={['Repositories', 'Subscriptions']}
+          children={[<RepoList url={profile.repos_url} />, <SubscriptionsData url={profile.following_url} />]}
         />
       )}
     </Container>
