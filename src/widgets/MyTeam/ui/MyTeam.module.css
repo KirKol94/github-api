@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--color);
+}
+
+.sortIcon {
+  svg {
+    color: var(--color);
+  }
+}
+
+.listItem {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+}
+
+.link {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.removeIcon {
+  svg {
+    color: var(--color);
+  }
+}

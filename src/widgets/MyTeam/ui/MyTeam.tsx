@@ -1,36 +1,24 @@
 import { myTeamStore } from '@/features/MyTeam'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove'
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha'
-import { Avatar, Box, Grid, IconButton, Link, List, ListItem, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, IconButton, Link, List, ListItem, Tooltip, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
+import c from './MyTeam.module.css'
+import { useMyTeam } from './useMyTeam'
 
 export const MyTeam = observer(() => {
-  const { myTeammates, removeTeammate } = myTeamStore
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc') // Состояние для хранения порядка сортировки
-
-  const handleSortClick = () => {
-    setSortOrder(prev => (prev === 'asc' ? 'desc' : 'asc'))
-  }
-
-  const sortedUsers = myTeammates ? [...myTeammates] : [] // Копируем массив пользователей
-
-  sortedUsers.sort((a, b) => {
-    if (sortOrder === 'asc') {
-      return a.login.localeCompare(b.login)
-    } else {
-      return b.login.localeCompare(a.login)
-    }
-  })
+  const { removeTeammate, sortedUsers, handleSortClick } = useMyTeam()
 
   return (
-    <Grid item xs={12} md={6}>
-      <Box sx={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
+    <Box className={c.container}>
+      <Box className={c.header}>
         <Typography variant="h3" component="h2">
           My Team
         </Typography>
+
         <Tooltip title="Change sort order">
-          <IconButton onClick={handleSortClick}>
+          <IconButton onClick={handleSortClick} className={c.sortIcon}>
             <SortByAlphaIcon />
           </IconButton>
         </Tooltip>
@@ -38,22 +26,22 @@ export const MyTeam = observer(() => {
 
       <List>
         {sortedUsers.map(teammate => (
-          <ListItem key={teammate.id} sx={{ pl: 0, display: 'flex', justifyContent: 'space-between' }}>
-            <Link href={teammate.html_url} sx={{ color: 'inherit', display: 'flex', alignItems: 'center' }}>
+          <ListItem key={teammate.id} className={c.listItem}>
+            <Link href={teammate.html_url} className={c.link}>
               <Avatar alt={teammate.login} src={teammate.avatar_url} sx={{ width: 50, height: 50 }} />
-              <Typography variant="h6" component="h3" sx={{ ml: 1 }}>
+              <Typography variant="h6" component="h3">
                 {teammate.login}
               </Typography>
             </Link>
 
             <Tooltip title="Remove user from team">
-              <IconButton sx={{ ml: 1 }} onClick={() => removeTeammate(teammate.id)}>
+              <IconButton sx={{ ml: 1 }} onClick={() => removeTeammate(teammate.id)} className={c.removeIcon}>
                 <PersonRemoveIcon />
               </IconButton>
             </Tooltip>
           </ListItem>
         ))}
       </List>
-    </Grid>
+    </Box>
   )
 })
