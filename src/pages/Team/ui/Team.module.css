@@ -1,6 +1,6 @@
 .container {
   padding-top: 1rem;
   display: grid;
-  grid-template-columns: minmax(400px, 1fr) minmax(400px, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1rem;
 }
