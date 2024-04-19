@@ -1,24 +1,23 @@
 import { Box, Typography } from '@mui/material'
-import { Link, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { headerLinks } from '../model/data/headerLinks'
+import c from './Header.module.css'
 
 export const Header = () => {
-  const { pathname } = useLocation()
-
   return (
-    <Box component="header" sx={{ borderBottom: '2px solid black', bgcolor: 'black' }}>
-      <Box component="div" sx={{ display: 'flex' }}>
+    <Box component="header" className={c.header}>
+      <Box className={c.container}>
         {headerLinks.map(link => (
-          <Link key={link.path} to={link.path}>
-            <Box
-              sx={{ px: 2, display: 'flex', alignItems: 'center', color: pathname === link.path ? 'primary' : 'white' }}
-            >
-              {link.Icon && <link.Icon />}
-              <Typography variant="body1" sx={{ py: 3, pl: 1 }}>
-                {link.name}
-              </Typography>
-            </Box>
-          </Link>
+          <NavLink
+            key={link.path}
+            to={link.path}
+            className={({ isActive }) => (isActive ? `${c.link} ${c.isActive}` : c.link)}
+          >
+            {link.Icon && <link.Icon />}
+            <Typography variant="body1" className={c.linkText}>
+              {link.name}
+            </Typography>
+          </NavLink>
         ))}
       </Box>
     </Box>

@@ -1,0 +1,26 @@
+.header {
+  box-shadow: var(--box-shadow);
+}
+
+.container {
+  max-width: 1400px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  color: var(--color);
+
+  &.isActive {
+    color: #0070f3;
+  }
+}
+
+.linkText {
+  padding-left: 0.5rem;
+}
