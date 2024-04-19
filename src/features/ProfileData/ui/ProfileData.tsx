@@ -2,21 +2,10 @@ import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Avatar, Box, Grid, Link, TextField, Tooltip, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { profileDataStore } from '../model/store/profileDataStore'
+import { useProfileData } from './useProfileData'
 
 export const ProfileData = () => {
-  const { fetchProfile, profile, error, isLoading } = profileDataStore
-  const [login, setLogin] = useState('')
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    fetchProfile('https://api.github.com/users/' + login)
-  }
-
-  useEffect(() => {
-    fetchProfile('https://api.github.com/users/kirkol94')
-  }, [fetchProfile])
+  const { isLoading, error, profile, login, setLogin, handleSubmit } = useProfileData()
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>
