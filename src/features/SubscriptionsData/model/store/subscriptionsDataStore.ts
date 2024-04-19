@@ -23,8 +23,9 @@ class SubscriptionsDataStore implements SubscriptionsState {
     this.isLoading = true
     this.error = null
     const correctUrl = url.replace('{/other_user}', '')
-    $api<GHSubscription[]>(correctUrl).then(this.successFetch, this.failedFetch)
-    this.isLoading = false
+    $api<GHSubscription[]>(correctUrl)
+      .then(this.successFetch, this.failedFetch)
+      .finally(() => (this.isLoading = false))
   }
 
   private successFetch = (res: AxiosResponse<GHSubscription[]>) => {

@@ -1,0 +1,16 @@
+.list {
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.listItem {
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+}
