@@ -23,8 +23,8 @@ export const SubscriptionsData = observer(({ url }: { url: string }) => {
 
       <List>
         {subscriptions.map(sub => (
-          <ListItem key={sub.id} sx={{ pl: 0 }}>
-            <Link href={sub.html_url} sx={{ color: 'inherit', display: 'flex', alignItems: 'center' }}>
+          <ListItem key={sub.id} sx={{ boxShadow: 1 }}>
+            <Link href={sub.html_url} sx={{ color: 'inherit', display: 'flex', alignItems: 'center', width: '100%' }}>
               <Avatar alt={sub.login} src={sub.avatar_url} sx={{ width: 50, height: 50 }} />
 
               <Typography variant="h6" component="h3" sx={{ ml: 1 }}>

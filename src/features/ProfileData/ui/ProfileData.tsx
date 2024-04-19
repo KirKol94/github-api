@@ -30,7 +30,7 @@ export const ProfileData = () => {
 
       <Grid item xs={12} sm={6} md={9} sx={{ pl: 2 }}>
         <Tooltip title="Go to GitHub profile">
-          <Link href={profile?.html_url} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Link href={profile?.html_url} sx={{ display: 'flex', alignItems: 'center', gap: 2, width: 'fit-content' }}>
             <Typography variant="h2" component="h1">
               {profile?.login}
             </Typography>
