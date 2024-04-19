@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
+import c from './HomeTabs.module.css'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -50,8 +51,8 @@ export const HomeTabs = observer(() => {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box className={c.container}>
+      <Box className={c.tabs}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Repositories" {...a11yProps(0)} />
           <Tab label="Subscriptions" {...a11yProps(1)} />
