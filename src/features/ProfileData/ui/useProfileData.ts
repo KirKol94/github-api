@@ -7,7 +7,8 @@ export const useProfileData = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    fetchProfile('https://api.github.com/users/' + login)
+
+    fetchProfile(`https://api.github.com/users/${login}`)
   }
 
   useEffect(() => {

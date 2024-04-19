@@ -1,6 +1,6 @@
 import { $api } from '@/shared/api'
-import { AxiosResponse } from 'axios'
-import { makeAutoObservable } from 'mobx'
+import { AxiosError, AxiosResponse } from 'axios'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { GHProfile } from '../types'
 
 interface ProfileState {
@@ -19,19 +19,29 @@ class ProfileDataStore implements ProfileState {
   isLoading: boolean = false
   error: string | null = null
 
-  fetchProfile = (url: string) => {
-    this.isLoading = true
-    this.error = null
-    $api<GHProfile>(url).then(this.successFetch, this.failedFetch)
-    this.isLoading = false
+  fetchProfile = async (url: string) => {
+    runInAction(() => {
+      this.isLoading = true
+      this.error = null
+    })
+
+    try {
+      const res = await $api<GHProfile>(url)
+      runInAction(() => this.successFetch(res))
+    } catch (error) {
+      if (error instanceof AxiosError) runInAction(() => this.failedFetch(error))
+      else throw error
+    } finally {
+      runInAction(() => (this.isLoading = false))
+    }
   }
 
   private successFetch = (res: AxiosResponse<GHProfile>) => {
     this.profile = res.data
   }
 
-  private failedFetch = (error: string) => {
-    this.error = error
+  private failedFetch = (error: AxiosError) => {
+    this.error = error.message
   }
 }
 
