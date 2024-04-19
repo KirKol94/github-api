@@ -18,8 +18,4 @@ export const headerLinks: HeaderLink[] = [
     path: '/team',
     Icon: GroupIcon,
   },
-  {
-    path: '/notFoundPage',
-    name: 'Not Found',
-  },
 ]
