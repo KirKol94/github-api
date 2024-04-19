@@ -1,9 +1,7 @@
-import { myTeamStore } from '@/features/MyTeam'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove'
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha'
 import { Avatar, Box, IconButton, Link, List, ListItem, Tooltip, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
 import c from './MyTeam.module.css'
 import { useMyTeam } from './useMyTeam'
 
