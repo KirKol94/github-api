@@ -39,6 +39,7 @@
 
     input {
       border-bottom: 1px solid var(--color);
+      color: var(--color);
     }
   }
 }
