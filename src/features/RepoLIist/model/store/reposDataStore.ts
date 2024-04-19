@@ -1,5 +1,5 @@
 import { $api } from '@/shared/api'
-import { AxiosResponse } from 'axios'
+import { AxiosResponse, AxiosError } from 'axios'
 import { makeAutoObservable } from 'mobx'
 import { GHRepo } from '../types'
 
@@ -22,16 +22,17 @@ class ReposDataStore implements ReposState {
   fetchRepositories = (url: string) => {
     this.isLoading = true
     this.error = null
-    $api<GHRepo[]>(url).then(this.successFetch, this.failedFetch)
-    this.isLoading = false
+    $api<GHRepo[]>(url)
+      .then(this.successFetch, this.failedFetch)
+      .finally(() => (this.isLoading = false))
   }
 
   private successFetch = (data: AxiosResponse<GHRepo[]>) => {
     this.repositories = data.data
   }
 
-  private failedFetch = (error: string) => {
-    this.error = error
+  private failedFetch = (error: AxiosError) => {
+    this.error = error.message
   }
 }
 

@@ -7,6 +7,7 @@ import { Box, Grid, IconButton, Link, List, ListItem, Tooltip, Typography } from
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { reposDataStore } from '../model/store/reposDataStore'
+import c from './RepoList.module.css'
 
 export const RepoList = observer(({ url }: { url: string }) => {
   const { fetchRepositories, error, isLoading, repositories } = reposDataStore
@@ -17,64 +18,44 @@ export const RepoList = observer(({ url }: { url: string }) => {
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>
-  if (!repositories) return <Typography variant="h1">Repositories not found</Typography>
+  if (repositories.length === 0) return <Typography variant="h1">Repositories list is empty</Typography>
 
   return (
     <Box>
-      <Typography variant="h3" component="h2">
-        Repos
-      </Typography>
-
-      <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        {repositories.length &&
+      <List className={c.list}>
+        {Array.isArray(repositories) &&
           repositories.map(repo => (
-            <ListItem
-              key={repo.id}
-              sx={{
-                overflowX: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'start',
-                boxShadow: 1,
-              }}
-            >
-              <Grid container alignContent="center" alignItems="center">
-                <Grid item xs={12} sm={6} md={4}>
-                  <Link href={repo.html_url} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <ListItem key={repo.id} className={c.listItem}>
+              <Box className={c.repoHeader}>
+                <Box className={c.repoName}>
+                  <Link href={repo.html_url} className={c.repoNameLink}>
                     <GitHubIcon />
                     <Typography variant="h6" component="h3">
                       {repo.name}
                     </Typography>
                   </Link>
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <SettingsEthernetIcon />
-                  <Typography variant="h6" component="i">
-                    {repo.language}
-                  </Typography>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
-                >
-                  <Link href={repo.clone_url} sx={{ maxWidth: '100%', overflow: 'hidden' }}>
-                    <Typography variant="subtitle2">{repo.clone_url}</Typography>
-                  </Link>
 
                   <Tooltip title="Copy to clipboard">
-                    <IconButton onClick={() => navigator.clipboard.writeText(repo?.clone_url)}>
+                    <IconButton
+                      onClick={() => navigator.clipboard.writeText('git clone ' + repo?.clone_url)}
+                      className={c.copyIcon}
+                    >
                       <ContentCopyIcon />
                     </IconButton>
                   </Tooltip>
-                </Grid>
-              </Grid>
+                </Box>
 
-              <Typography variant="body1">createdAt: {dateFormatter(repo.created_at)}</Typography>
+                <Box className={c.languageAndData}>
+                  <Box className={c.language}>
+                    <SettingsEthernetIcon />
+                    <Typography variant="h6" component="i">
+                      {repo.language}
+                    </Typography>
+                  </Box>
+
+                  <Typography variant="body1">{dateFormatter(repo.created_at)}</Typography>
+                </Box>
+              </Box>
 
               <Typography variant="body2">{repo.description}</Typography>
             </ListItem>
