@@ -15,7 +15,7 @@ export const SubscriptionsData = observer(({ url }: { url: string }) => {
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>
-  if (subscriptions.length === 0) return <Typography variant="h1">Subscriptions list is empty</Typography>
+  if (subscriptions.length === 0) return <Typography variant="h4">Subscriptions list is empty</Typography>
 
   return (
     <List className={c.list}>
