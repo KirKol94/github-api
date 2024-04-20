@@ -45,6 +45,18 @@ export const CardRepository = ({ repo }: CardRepositoryProps) => {
       </Box>
 
       <Typography variant="body2">{repo.description}</Typography>
+
+      <Box className={c.repoFooter}>
+        <ul className={c.topics}>
+          {repo.topics.map(topic => (
+            <li key={topic} className={c.topic}>
+              <Typography variant="body2" className={c.topicText}>
+                {topic}
+              </Typography>
+            </li>
+          ))}
+        </ul>
+      </Box>
     </Box>
   )
 }
