@@ -16,7 +16,7 @@ class ProfileDataStore implements ProfileState {
   }
 
   profile: GHProfile | null = null
-  isLoading: boolean = false
+  isLoading: boolean = true
   error: string | null = null
 
   fetchProfile = async (url: string) => {
@@ -24,7 +24,6 @@ class ProfileDataStore implements ProfileState {
       this.isLoading = true
       this.error = null
     })
-
     try {
       const res = await $api<GHProfile>(url)
       runInAction(() => this.successFetch(res))
