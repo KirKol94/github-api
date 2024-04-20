@@ -66,3 +66,13 @@
   border-radius: 4px;
   box-shadow: var(--box-shadow);
 }
+
+.contributors {
+  margin-top: 1rem;
+}
+
+.contributorsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

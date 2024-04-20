@@ -2,16 +2,29 @@ import { dateFormatter } from '@/shared/utils/dateFormatter'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet'
-import { Box, IconButton, Link, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, IconButton, Link, Tooltip, Typography } from '@mui/material'
 import { GHRepository } from '../model/types'
 import c from './CardRepository.module.css'
 import { Language } from '@mui/icons-material'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 interface CardRepositoryProps {
   repo: GHRepository
 }
 
 export const CardRepository = ({ repo }: CardRepositoryProps) => {
+  const [contributors, setContributors] = useState([])
+
+  const fetchData = async () => {
+    const res = await axios(repo.contributors_url)
+    setContributors(res.data)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <Box className={c.repo}>
       <Box className={c.repoHeader}>
@@ -67,6 +80,20 @@ export const CardRepository = ({ repo }: CardRepositoryProps) => {
           ))}
         </ul>
       </Box>
+
+      {contributors.length > 1 && (
+        <Box className={c.contributors}>
+          <ul className={c.contributorsList}>
+            {contributors.map((contributor: any) => (
+              <li key={contributor.login} className={c.contributor}>
+                <Link target="_blank" href={contributor.html_url}>
+                  <Avatar alt={contributor.login} src={contributor.avatar_url} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Box>
+      )}
     </Box>
   )
 }
