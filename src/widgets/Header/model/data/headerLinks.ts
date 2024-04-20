@@ -13,9 +13,4 @@ export const headerLinks: HeaderLink[] = [
     path: '/',
     Icon: AccountCircleIcon,
   },
-  {
-    name: 'Team',
-    path: '/team',
-    Icon: GroupIcon,
-  },
 ]
