@@ -36,8 +36,8 @@ class ReposDataStore implements ReposState {
     }
   }
 
-  private successFetch = (data: AxiosResponse<GHRepo[]>) => {
-    this.repositories = data.data
+  private successFetch = (res: AxiosResponse<GHRepo[]>) => {
+    this.repositories = res.data.sort((a, b) => b.updated_at.localeCompare(a.updated_at))
   }
 
   private failedFetch = (error: AxiosError) => {
