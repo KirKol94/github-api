@@ -1,7 +1,12 @@
 {
-  "name": "vipax-plus",
+  "name": "api-gh",
+  "homepage": "https://github.com/KirKol94/github-api",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "author": {
+    "name": "KirKol94",
+    "url": "https://github.com/KirKol94"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -17,3 +17,11 @@
 .bio {
   margin-top: 1rem;
 }
+
+.link {
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
+}

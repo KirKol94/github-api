@@ -4,6 +4,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import { Avatar, Box, Grid, Link, Tooltip, Typography } from '@mui/material'
 import c from './Profile.module.css'
 import { useProfile } from './useProfile'
+import LanguageIcon from '@mui/icons-material/Language'
 
 export const Profile = () => {
   const { isLoading, error, profile } = useProfile()
@@ -35,6 +36,13 @@ export const Profile = () => {
             Account created: <b>{dateFormatter(profile?.created_at)}</b>
           </Typography>
         </Box>
+
+        {profile?.blog && (
+          <Link target="_blank" href={profile?.blog} className={c.link}>
+            <LanguageIcon />
+            {profile?.blog}
+          </Link>
+        )}
       </Grid>
     </Grid>
   )
