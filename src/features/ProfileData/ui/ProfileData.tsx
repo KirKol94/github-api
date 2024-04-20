@@ -14,11 +14,11 @@ export const ProfileData = () => {
 
   return (
     <Grid container className={c.container}>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={12} sm={4} md={2}>
         <Avatar alt={profile?.name} src={profile?.avatar_url} sx={{ width: '100%', height: '100%' }} />
       </Grid>
 
-      <Grid item xs={12} sm={6} md={9} className={c.info}>
+      <Grid item xs={12} sm={8} md={10} className={c.info}>
         <Tooltip title="Go to GitHub profile">
           <Link href={profile?.html_url} className={c.titleWrapper}>
             <Typography variant="h2" component="h1">
