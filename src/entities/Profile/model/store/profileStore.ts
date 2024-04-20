@@ -40,7 +40,8 @@ class ProfileStore implements ProfileState {
     this.profile = res.data
   }
 
-  private failedFetch = (error: AxiosError) => {
+  private failedFetch = (error: AxiosError<{ message: string }>) => {
+    if (error.response?.data.message) alert(error.response?.data.message)
     this.error = error.message
   }
 }

@@ -10,7 +10,6 @@ export const Profile = () => {
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>
-  if (!profile) return <Typography variant="h1">Profile not found</Typography>
 
   return (
     <Grid container className={c.container}>
@@ -30,10 +29,10 @@ export const Profile = () => {
         </Tooltip>
 
         <Box className={c.bio}>
-          <Typography variant="subtitle2">{profile.bio}</Typography>
+          <Typography variant="subtitle2">{profile?.bio}</Typography>
 
           <Typography variant="body1">
-            Account created: <b>{dateFormatter(profile.created_at)}</b>
+            Account created: <b>{dateFormatter(profile?.created_at)}</b>
           </Typography>
         </Box>
       </Grid>
