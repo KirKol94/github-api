@@ -20,7 +20,7 @@ export const Profile = () => {
 
       <Grid item xs={12} sm={8} md={10} className={c.info}>
         <Tooltip title="Go to GitHub profile">
-          <Link href={profile?.html_url} className={c.titleWrapper}>
+          <Link target="_blank" href={profile?.html_url} className={c.titleWrapper}>
             <Typography variant="h2" component="h1">
               {profile?.login}
             </Typography>
