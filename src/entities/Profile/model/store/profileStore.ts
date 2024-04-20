@@ -23,6 +23,7 @@ class ProfileStore implements ProfileState {
     runInAction(() => {
       this.isLoading = true
       this.error = null
+      this.profile = null
     })
     try {
       const res = await $api<GHProfile>(url)
