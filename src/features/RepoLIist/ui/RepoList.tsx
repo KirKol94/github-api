@@ -14,8 +14,8 @@ export const RepoList = observer(({ url }: { url: string }) => {
   }, [fetchRepositories, url])
 
   if (isLoading) return <Loader />
-  if (error) return <Typography variant="h1">{error}</Typography>
-  if (repositories.length === 0) return <Typography variant="h1">Repositories list is empty</Typography>
+  if (error) return <Typography variant="h4">{error}</Typography>
+  if (repositories.length === 0) return <Typography variant="h4">Repositories list is empty</Typography>
 
   return (
     <Box>

@@ -5,6 +5,7 @@ import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet'
 import { Box, IconButton, Link, Tooltip, Typography } from '@mui/material'
 import { GHRepository } from '../model/types'
 import c from './CardRepository.module.css'
+import { Language } from '@mui/icons-material'
 
 interface CardRepositoryProps {
   repo: GHRepository
@@ -42,6 +43,13 @@ export const CardRepository = ({ repo }: CardRepositoryProps) => {
 
           <Typography variant="body1">{dateFormatter(repo.created_at)}</Typography>
         </Box>
+
+        <Link target="_blank" href={repo.homepage} className={c.homepage}>
+          <Language />
+          <Typography variant="h6" component="i">
+            website
+          </Typography>
+        </Link>
       </Box>
 
       <Typography variant="body2">{repo.description}</Typography>

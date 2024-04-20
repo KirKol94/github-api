@@ -44,6 +44,14 @@
   justify-content: space-between;
 }
 
+.homepage {
+  margin-top: 1rem;
+  width: min-content;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .topics {
   display: flex;
   flex-wrap: wrap;
