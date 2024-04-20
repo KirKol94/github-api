@@ -1,4 +1,4 @@
-const GHSubscriptionData = {
+const GHSubscribeData = {
   login: 'tshemsedinov',
   id: 4405297,
   node_id: 'MDQ6VXNlcjQ0MDUyOTc=',
@@ -19,4 +19,4 @@ const GHSubscriptionData = {
   site_admin: false,
 }
 
-export type GHSubscription = typeof GHSubscriptionData
+export type GHSubscribe = typeof GHSubscribeData

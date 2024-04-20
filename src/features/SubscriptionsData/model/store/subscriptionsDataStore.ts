@@ -1,10 +1,10 @@
 import { $api } from '@/shared/api'
 import { AxiosError, AxiosResponse } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
-import { GHSubscription } from '../types'
+import { GHSubscribe } from '@/entities/CardSubscribe'
 
 interface SubscriptionsState {
-  subscriptions: GHSubscription[]
+  subscriptions: GHSubscribe[]
   isLoading: boolean
   error: string | null
   fetchSubscriptions: (url: string) => void
@@ -15,7 +15,7 @@ class SubscriptionsDataStore implements SubscriptionsState {
     makeAutoObservable(this)
   }
 
-  subscriptions: GHSubscription[] = []
+  subscriptions: GHSubscribe[] = []
   isLoading: boolean = false
   error: string | null = null
 
@@ -26,7 +26,7 @@ class SubscriptionsDataStore implements SubscriptionsState {
     })
     try {
       const correctUrl = url.replace('{/other_user}', '')
-      const res = await $api<GHSubscription[]>(correctUrl)
+      const res = await $api<GHSubscribe[]>(correctUrl)
       runInAction(() => this.successFetch(res))
     } catch (error) {
       if (error instanceof AxiosError) runInAction(() => this.failedFetch(error))
@@ -36,7 +36,7 @@ class SubscriptionsDataStore implements SubscriptionsState {
     }
   }
 
-  private successFetch = (res: AxiosResponse<GHSubscription[]>) => {
+  private successFetch = (res: AxiosResponse<GHSubscribe[]>) => {
     this.subscriptions = res.data
   }
 

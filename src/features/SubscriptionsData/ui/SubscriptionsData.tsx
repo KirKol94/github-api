@@ -1,8 +1,9 @@
-import { subscriptionsDataStore } from '../model/store/subscriptionsDataStore'
+import { CardSubscribe } from '@/entities/CardSubscribe'
 import { Loader } from '@/shared/ui/Loader'
-import { Avatar, Box, Link, List, ListItem, Typography } from '@mui/material'
+import { List, ListItem, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
+import { subscriptionsDataStore } from '../model/store/subscriptionsDataStore'
 import c from './Subscriptions.module.css'
 
 export const SubscriptionsData = observer(({ url }: { url: string }) => {
@@ -20,15 +21,7 @@ export const SubscriptionsData = observer(({ url }: { url: string }) => {
     <List className={c.list}>
       {subscriptions.map(sub => (
         <ListItem key={sub.id} className={c.listItem}>
-          <Link href={sub.html_url} sx={{ color: 'inherit', display: 'flex', alignItems: 'center', width: '100%' }}>
-            <Box className={c.itemHeader}>
-              <Avatar alt={sub.login} src={sub.avatar_url} sx={{ width: 50, height: 50 }} />
-
-              <Typography variant="h6" component="h3" sx={{ ml: 1 }}>
-                {sub.login}
-              </Typography>
-            </Box>
-          </Link>
+          <CardSubscribe sub={sub} />
         </ListItem>
       ))}
     </List>

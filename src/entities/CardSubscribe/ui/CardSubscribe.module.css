@@ -1,0 +1,12 @@
+.item {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+.itemHeader {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
