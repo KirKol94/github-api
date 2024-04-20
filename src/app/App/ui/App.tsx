@@ -1,7 +1,6 @@
 import Layout from '@/app/Layout/Layout'
 import { ErrorPage } from '@/pages/ErrorPage'
 import { Home } from '@/pages/Home'
-import { Team } from '@/pages/Team'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
