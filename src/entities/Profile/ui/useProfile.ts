@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { profileDataStore } from '../model/store/profileDataStore'
+import { profileStore } from '../model/store/profileStore'
 
-export const useProfileData = () => {
-  const { fetchProfile, profile, error, isLoading } = profileDataStore
+export const useProfile = () => {
+  const { fetchProfile, profile, error, isLoading } = profileStore
   const [login, setLogin] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {

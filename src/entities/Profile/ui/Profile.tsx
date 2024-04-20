@@ -2,11 +2,11 @@ import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Avatar, Box, Grid, Link, TextField, Tooltip, Typography } from '@mui/material'
-import { useProfileData } from './useProfileData'
-import c from './ProfileData.module.css'
+import { useProfile } from './useProfile'
+import c from './Profile.module.css'
 
-export const ProfileData = () => {
-  const { isLoading, error, profile, login, setLogin, handleSubmit } = useProfileData()
+export const Profile = () => {
+  const { isLoading, error, profile, login, setLogin, handleSubmit } = useProfile()
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>

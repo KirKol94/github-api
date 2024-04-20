@@ -1,14 +1,14 @@
 import { HomeTabs } from '@/widgets/HomeTabs'
-import { ProfileData, profileDataStore } from '@/features/ProfileData'
+import { Profile, profileStore } from '@/entities/Profile'
 import { Container } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
 export const Home = observer(() => {
-  const { profile } = profileDataStore
+  const { profile } = profileStore
 
   return (
     <Container>
-      <ProfileData />
+      <Profile />
       {profile && <HomeTabs />}
     </Container>
   )

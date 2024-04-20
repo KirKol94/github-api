@@ -10,13 +10,13 @@ interface ProfileState {
   fetchProfile: (url: string) => void
 }
 
-class ProfileDataStore implements ProfileState {
+class ProfileStore implements ProfileState {
   constructor() {
     makeAutoObservable(this)
   }
 
   profile: GHProfile | null = null
-  isLoading: boolean = true
+  isLoading: boolean = false
   error: string | null = null
 
   fetchProfile = async (url: string) => {
@@ -44,4 +44,4 @@ class ProfileDataStore implements ProfileState {
   }
 }
 
-export const profileDataStore = new ProfileDataStore()
+export const profileStore = new ProfileStore()
