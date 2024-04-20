@@ -1,9 +1,6 @@
+import { CardRepository } from '@/entities/CardRepository'
 import { Loader } from '@/shared/ui/Loader'
-import { dateFormatter } from '@/shared/utils/dateFormatter'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet'
-import { Box, IconButton, Link, List, ListItem, Tooltip, Typography } from '@mui/material'
+import { Box, List, ListItem, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { reposDataStore } from '../model/store/reposDataStore'
@@ -25,39 +22,8 @@ export const RepoList = observer(({ url }: { url: string }) => {
       <List className={c.list}>
         {Array.isArray(repositories) &&
           repositories.map(repo => (
-            <ListItem key={repo.id} className={c.listItem}>
-              <Box className={c.repoHeader}>
-                <Box className={c.repoName}>
-                  <Link href={repo.html_url} className={c.repoNameLink}>
-                    <GitHubIcon />
-                    <Typography variant="h6" component="h3">
-                      {repo.name}
-                    </Typography>
-                  </Link>
-
-                  <Tooltip title="Copy to clipboard">
-                    <IconButton
-                      onClick={() => navigator.clipboard.writeText('git clone ' + repo?.clone_url)}
-                      className={c.copyIcon}
-                    >
-                      <ContentCopyIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
-
-                <Box className={c.languageAndData}>
-                  <Box className={c.language}>
-                    <SettingsEthernetIcon />
-                    <Typography variant="h6" component="i">
-                      {repo.language}
-                    </Typography>
-                  </Box>
-
-                  <Typography variant="body1">{dateFormatter(repo.created_at)}</Typography>
-                </Box>
-              </Box>
-
-              <Typography variant="body2">{repo.description}</Typography>
+            <ListItem key={repo.id}>
+              <CardRepository repo={repo} />
             </ListItem>
           ))}
       </List>
