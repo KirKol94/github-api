@@ -1,12 +1,12 @@
 import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Avatar, Box, Grid, Link, TextField, Tooltip, Typography } from '@mui/material'
-import { useProfile } from './useProfile'
+import { Avatar, Box, Grid, Link, Tooltip, Typography } from '@mui/material'
 import c from './Profile.module.css'
+import { useProfile } from './useProfile'
 
 export const Profile = () => {
-  const { isLoading, error, profile, login, setLogin, handleSubmit } = useProfile()
+  const { isLoading, error, profile } = useProfile()
 
   if (isLoading) return <Loader />
   if (error) return <Typography variant="h1">{error}</Typography>
@@ -28,18 +28,6 @@ export const Profile = () => {
             <GitHubIcon />
           </Link>
         </Tooltip>
-
-        <form onSubmit={handleSubmit}>
-          <TextField
-            className={c.input}
-            fullWidth
-            label="Type here other login"
-            variant="filled"
-            value={login}
-            onChange={e => setLogin(e.target.value)}
-            onSubmit={handleSubmit}
-          />
-        </form>
 
         <Box className={c.bio}>
           <Typography variant="subtitle2">{profile.bio}</Typography>
