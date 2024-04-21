@@ -1,29 +1,29 @@
 import { dateFormatter } from '@/shared/utils/dateFormatter'
+import { Language } from '@mui/icons-material'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet'
 import { Avatar, Box, IconButton, Link, Tooltip, Typography } from '@mui/material'
-import { GHRepository } from '../model/types'
-import c from './CardRepository.module.css'
-import { Language } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useCallback, useEffect, useState } from 'react'
+import { GHContributor, GHRepository } from '../model/types'
+import c from './CardRepository.module.css'
 
 interface CardRepositoryProps {
   repo: GHRepository
 }
 
 export const CardRepository = ({ repo }: CardRepositoryProps) => {
-  const [contributors, setContributors] = useState([])
+  const [contributors, setContributors] = useState<GHContributor[]>([])
 
-  const fetchData = async () => {
-    const res = await axios(repo.contributors_url)
+  const fetchData = useCallback(async () => {
+    const res = await axios<GHContributor[]>(repo.contributors_url)
     setContributors(res.data)
-  }
+  }, [repo.contributors_url])
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   return (
     <Box className={c.repo}>
@@ -84,11 +84,13 @@ export const CardRepository = ({ repo }: CardRepositoryProps) => {
       {contributors.length > 1 && (
         <Box className={c.contributors}>
           <ul className={c.contributorsList}>
-            {contributors.map((contributor: any) => (
+            {contributors.map(contributor => (
               <li key={contributor.login} className={c.contributor}>
-                <Link target="_blank" href={contributor.html_url}>
-                  <Avatar alt={contributor.login} src={contributor.avatar_url} />
-                </Link>
+                <Tooltip title={contributor.login}>
+                  <Link target="_blank" href={contributor.html_url}>
+                    <Avatar alt={contributor.login} src={contributor.avatar_url} />
+                  </Link>
+                </Tooltip>
               </li>
             ))}
           </ul>

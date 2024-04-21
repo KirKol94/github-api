@@ -13,6 +13,7 @@ interface ProfileState {
 class ProfileStore implements ProfileState {
   constructor() {
     makeAutoObservable(this)
+    this.fetchProfile('https://api.github.com/users/kirkol94')
   }
 
   profile: GHProfile | null = null

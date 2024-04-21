@@ -115,4 +115,27 @@ const GHRepositoryData = {
   default_branch: 'master',
 }
 
+const GHContributorData = {
+  login: 'KirKol94',
+  id: 83208995,
+  node_id: 'MDQ6VXNlcjgzMjA4OTk1',
+  avatar_url: 'https://avatars.githubusercontent.com/u/83208995?v=4',
+  gravatar_id: '',
+  url: 'https://api.github.com/users/KirKol94',
+  html_url: 'https://github.com/KirKol94',
+  followers_url: 'https://api.github.com/users/KirKol94/followers',
+  following_url: 'https://api.github.com/users/KirKol94/following{/other_user}',
+  gists_url: 'https://api.github.com/users/KirKol94/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/KirKol94/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/KirKol94/subscriptions',
+  organizations_url: 'https://api.github.com/users/KirKol94/orgs',
+  repos_url: 'https://api.github.com/users/KirKol94/repos',
+  events_url: 'https://api.github.com/users/KirKol94/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/KirKol94/received_events',
+  type: 'User',
+  site_admin: false,
+  contributions: 335,
+}
+
 export type GHRepository = typeof GHRepositoryData
+export type GHContributor = typeof GHContributorData

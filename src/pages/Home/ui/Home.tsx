@@ -1,8 +1,8 @@
-import { HomeTabs } from '@/widgets/HomeTabs'
 import { Profile, profileStore } from '@/entities/Profile'
+import { ProfileSearch } from '@/features/ProfileSearch'
+import { HomeTabs } from '@/widgets/HomeTabs'
 import { Container } from '@mui/material'
 import { observer } from 'mobx-react-lite'
-import { ProfileSearch } from '@/features/ProfileSearch'
 
 export const Home = observer(() => {
   const { profile } = profileStore
@@ -10,8 +10,8 @@ export const Home = observer(() => {
   return (
     <Container>
       <ProfileSearch />
-      <Profile />
-      {profile && <HomeTabs />}
+      {profile && <Profile profile={profile} />}
+      {profile && <HomeTabs profile={profile} />}
     </Container>
   )
 })

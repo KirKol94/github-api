@@ -1,11 +1,9 @@
 import { profileStore } from '@/entities/Profile'
-import { useDebounce } from '@/shared/hooks/useDebounce'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export const useProfileSearch = () => {
   const { fetchProfile } = profileStore
   const [login, setLogin] = useState('')
-  const debouncedLogin = useDebounce(login, 500)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.target.value)
@@ -13,11 +11,8 @@ export const useProfileSearch = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    fetchProfile('https://api.github.com/users/' + login || 'kirKol94')
   }
-
-  useEffect(() => {
-    fetchProfile(`https://api.github.com/users/${debouncedLogin ? debouncedLogin : 'kirkol94'}`)
-  }, [debouncedLogin, fetchProfile])
 
   return { login, handleChange, handleSubmit }
 }

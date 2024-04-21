@@ -1,4 +1,4 @@
-import { profileStore } from '@/entities/Profile'
+import { GHProfile } from '@/entities/Profile/model/types'
 import { RepoList } from '@/features/RepoLIist'
 import { SubscriptionsData } from '@/features/SubscriptionsData'
 import Box from '@mui/material/Box'
@@ -36,9 +36,11 @@ function a11yProps(index: number) {
     'aria-controls': `simple-tabpanel-${index}`,
   }
 }
+interface Props {
+  profile: GHProfile | null
+}
 
-export const HomeTabs = observer(() => {
-  const { profile } = profileStore
+export const HomeTabs = observer(({ profile }: Props) => {
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

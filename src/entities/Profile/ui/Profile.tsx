@@ -1,17 +1,15 @@
-import { Loader } from '@/shared/ui/Loader'
 import { dateFormatter } from '@/shared/utils/dateFormatter'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Avatar, Box, Grid, Link, Tooltip, Typography } from '@mui/material'
 import c from './Profile.module.css'
-import { useProfile } from './useProfile'
 import LanguageIcon from '@mui/icons-material/Language'
+import { GHProfile } from '../model/types'
 
-export const Profile = () => {
-  const { isLoading, error, profile } = useProfile()
+interface Props {
+  profile: GHProfile | null
+}
 
-  if (isLoading) return <Loader />
-  if (error) return <Typography variant="h1">{error}</Typography>
-
+export const Profile = ({ profile }: Props) => {
   return (
     <Grid container className={c.container}>
       <Grid item xs={12} sm={4} md={2}>

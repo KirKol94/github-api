@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 import { useProfileSearch } from './useProfileSearch'
 import c from './ProfileSearch.module.css'
 
@@ -6,7 +6,7 @@ export const ProfileSearch = () => {
   const { login, handleChange, handleSubmit } = useProfileSearch()
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={c.form}>
       <TextField
         className={c.input}
         fullWidth
@@ -16,6 +16,10 @@ export const ProfileSearch = () => {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
+
+      <Button type="submit" variant="contained">
+        Search
+      </Button>
     </form>
   )
 }
