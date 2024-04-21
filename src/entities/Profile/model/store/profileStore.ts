@@ -13,7 +13,6 @@ interface ProfileState {
 class ProfileStore implements ProfileState {
   constructor() {
     makeAutoObservable(this)
-    this.fetchProfile('https://api.github.com/users/kirkol94')
   }
 
   profile: GHProfile | null = null
@@ -42,8 +41,8 @@ class ProfileStore implements ProfileState {
   }
 
   private failedFetch = (error: AxiosError<{ message: string }>) => {
-    if (error.response?.data.message) alert(error.response?.data.message)
-    this.error = error.message
+    if (error.response?.data.message) this.error = error.response?.data.message
+    else this.error = error.message
   }
 }
 
