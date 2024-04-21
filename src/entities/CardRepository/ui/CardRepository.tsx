@@ -4,26 +4,16 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet'
 import { Avatar, Box, IconButton, Link, Tooltip, Typography } from '@mui/material'
-import axios from 'axios'
-import { useCallback, useEffect, useState } from 'react'
-import { GHContributor, GHRepository } from '../model/types'
+import { GHRepository } from '../model/types'
 import c from './CardRepository.module.css'
+import { useCardRepository } from './useCardRepository'
 
 interface CardRepositoryProps {
   repo: GHRepository
 }
 
 export const CardRepository = ({ repo }: CardRepositoryProps) => {
-  const [contributors, setContributors] = useState<GHContributor[]>([])
-
-  const fetchData = useCallback(async () => {
-    const res = await axios<GHContributor[]>(repo.contributors_url)
-    setContributors(res.data)
-  }, [repo.contributors_url])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
+  const { contributors } = useCardRepository(repo.contributors_url)
 
   return (
     <Box className={c.repo}>
